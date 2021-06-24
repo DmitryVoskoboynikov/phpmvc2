@@ -10,9 +10,9 @@ namespace Framework
         protected $_class;
 
         protected $_meta = array(
-            "class" => array(),
-            "properties" => array(),
-            "methods" => array()
+            "class" => null,
+            "properties" => null,
+            "methods" => null
         );
 
         protected $_properties = array();
@@ -88,7 +88,7 @@ namespace Framework
 
         public function getClassMeta()
         {
-            if (empty($this->_meta['class']))
+            if (is_null($this->_meta['class']))
             {
                 $comment = $this->_getClassComment();
 
@@ -98,7 +98,7 @@ namespace Framework
                 }
                 else
                 {
-                    $this->_meta["class"] = null;
+                    $this->_meta["class"] = array();
                 }
             }
 
