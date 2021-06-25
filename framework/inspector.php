@@ -10,9 +10,9 @@ namespace Framework
         protected $_class;
 
         protected $_meta = array(
-            "class" => null,
-            "properties" => null,
-            "methods" => null
+            "class" => array(),
+            "properties" => array(),
+            "methods" => array()
         );
 
         protected $_properties = array();
@@ -75,7 +75,7 @@ namespace Framework
                     {
                        $meta[$parts[0]] = ArrayMethods::clean(
                            ArrayMethods::trim(
-                               StringMethods::split($parts, ",")
+                               StringMethods::split($parts[1], ",")
                            )
                        );
                     }
@@ -88,7 +88,7 @@ namespace Framework
 
         public function getClassMeta()
         {
-            if (is_null($this->_meta['class']))
+            if (empty($this->_meta['class']))
             {
                 $comment = $this->_getClassComment();
 
@@ -104,6 +104,75 @@ namespace Framework
 
             return $this->_meta["class"];
         }
+
+        public function getPropertyMeta($property)
+        {
+            if (empty($this->_meta["properties"][$property]))
+            {
+                $comment = $this->_getPropertyComment($property);
+
+                if (!empty($comment))
+                {
+                    $this->_meta["properties"][$property] = $this->_parse($comment);
+                }
+                else
+                {
+                    $this->_meta["properties"][$property] = array();
+                }
+            }
+
+            return $this->_meta["properties"][$property];
+        }
+
+        public function getMethodMeta($method)
+        {
+            if (empty($this->_meta["methods"][$method]))
+            {
+                $comment = $this->_getMethodComment($method);
+
+                if (!empty($comment))
+                {
+                    $this->_meta["methods"][$method] = $this->_parse($comment);
+                }
+                else
+                {
+                    $this->_meta["methods"][$method] = array();
+                }
+            }
+
+            return $this->_meta["methods"][$method];
+        }
+
+        public function getClassProperties()
+        {
+            if (empty($this->_properties))
+            {
+                $properties = $this->_getClassProperties();
+
+                foreach ($properties as $property)
+                {
+                    $this->_properties[] = $property->getName();
+                }
+            }
+
+            return $this->_properties;
+        }
+
+        public function getClassMethods()
+        {
+            if (empty($this->_methods))
+            {
+                $methods = $this->_getClassMethods();
+
+                foreach ($methods as $method)
+                {
+                    $this->_methods[] = $method->getName();
+                }
+            }
+
+            return $this->_methods;
+        }
+
 
     }
 
