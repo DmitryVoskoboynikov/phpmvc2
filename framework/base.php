@@ -2,9 +2,9 @@
 
 namespace Framework
 {
-    use Framework\Inspector as Inspector;
+    //use Framework\Inspector as Inspector;
     //use Framework\ArrayMethods as ArrayMethods;
-    use Framework\StringMethods as StringMethods;
+    //use Framework\StringMethods as StringMethods;
     use Framework\Core\Exception as Exception;
 
     class Base

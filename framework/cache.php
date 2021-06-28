@@ -3,10 +3,10 @@
 namespace Framework
 {
     //use Framework\Base as Base;
-    //use Framework\Configuration as Configuration;
-    use Framework\Configuration\Exception as Exception;
+    //use Framework\Cache as Cache;
+    use Framework\Cache\Exception as Exception;
 
-    class Configuration extends Base
+    class Cache extends Base
     {
         /**
          * @readwrite
@@ -32,14 +32,15 @@ namespace Framework
 
             switch ($this->type)
             {
-                case "ini":
+                case "memcached":
                 {
-                    return new Configuration\Driver\Ini($this->options);
+                    return new Cache\Driver\Memcached($this->options);
                     break;
                 }
                 default:
                 {
                     throw new Exception\Argument("Invalid type");
+                    break;
                 }
             }
 
