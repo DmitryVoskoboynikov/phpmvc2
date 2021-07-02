@@ -34,6 +34,14 @@ try {
 
     /** Registry */
 
+    /** Router */
+    $route = new Framework\Router\Route\Simple(array(
+        'pattern' => 'user/:id/:test',
+        'controller' => 'user',
+        'action' => 'show'
+    ));
+
+    print_r($route);
 }
 catch (Exception $e)
 {
