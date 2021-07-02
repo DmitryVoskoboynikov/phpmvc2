@@ -29,6 +29,10 @@ try {
         $cache->set("friends.1", "testFriends");
     }
 
+    echo $friends;
+
+    /** Registry */
+    
 }
 catch (Exception $e)
 {
