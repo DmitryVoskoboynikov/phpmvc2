@@ -12,8 +12,9 @@ try {
     $configuration = new Framework\Configuration(array(
         "type" => "ini"
     ));
+    Framework\Registry::set("configuration", $configuration->initialize());
 
-    $configuration = $configuration->initialize();
+    $configuration = Framework\Registry::get("configuration");
     $configuration->parse(APP_PATH . '/application/configuration/database');
 
     /**  Cache */
@@ -32,7 +33,7 @@ try {
     echo $friends;
 
     /** Registry */
-    
+
 }
 catch (Exception $e)
 {
