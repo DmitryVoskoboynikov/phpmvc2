@@ -35,7 +35,7 @@ namespace Framework
 
             $getMatches = StringMethods::match($name, "^get([a-zA-Z0-9]+)$");
 
-            if (sizeof($getMatches) > 0)
+            if (isset($getMatches))
             {
                 $normalized = lcfirst($getMatches[0]);
                 $property = "_{$normalized}";
@@ -57,7 +57,7 @@ namespace Framework
             }
 
             $setMatches = StringMethods::match($name, "^set([a-zA-Z0-9]+)$");
-            if (sizeof($setMatches) > 0)
+            if (isset($setMatches))
             {
                 $normalized = lcfirst($setMatches[0]);
                 $property = "_{$normalized}";

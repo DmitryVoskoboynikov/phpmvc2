@@ -36,12 +36,21 @@ try {
 
     /** Router */
     $route = new Framework\Router\Route\Simple(array(
-        'pattern' => 'user/:id/:test',
+        'pattern' => 'user/:id',
         'controller' => 'user',
         'action' => 'show'
     ));
+    $route1 = new Framework\Router\Route\Simple(array(
+        'pattern' => 'user/:id/:test',
+        'controller' => 'user',
+        'action' => 'edit'
+    ));
 
-    print_r($route);
+    $router = new Framework\Router();
+    $router->addRoute($route);
+    $router->addRoute($route1);
+
+    $router->dispatch();
 }
 catch (Exception $e)
 {

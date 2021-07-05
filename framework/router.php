@@ -67,6 +67,11 @@ namespace Framework
             return $list;
         }
 
+        public function dispatch()
+        {
+
+        }
+
     }
 
 }

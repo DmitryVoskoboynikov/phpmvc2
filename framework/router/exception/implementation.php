@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework\Configuration\Exception
+namespace Framework\Router\Exception
 {
     use Framework\Router\Exception as Exception;
 
