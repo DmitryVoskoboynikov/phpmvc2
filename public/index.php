@@ -7,6 +7,9 @@ define("APP_PATH", dirname(dirname(__FILE__)));
 $path = '..';
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
+$path = '../controllers';
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+
 try {
     /** Configuration */
     $configuration = new Framework\Configuration(array(
@@ -30,7 +33,7 @@ try {
         $cache->set("friends.1", "testFriends");
     }
 
-    echo $friends;
+    //echo $friends;
 
     /** Registry */
 
@@ -47,6 +50,7 @@ try {
     ));
 
     $router = new Framework\Router();
+    $router->url = 'user/1/testText';
     $router->addRoute($route);
     $router->addRoute($route1);
 
