@@ -2,6 +2,9 @@
 
 namespace Framework
 {
+
+    use function MongoDB\BSON\toRelaxedExtendedJSON;
+
     class StringMethods
     {
         private static $_delimiter = "#";
@@ -53,6 +56,62 @@ namespace Framework
             $flags = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE;
             return preg_split(self::_normalize($pattern), $string, $limit, $flags);
         }
+
+        public static function sanitize($string, $mask)
+        {
+            if (is_array($mask))
+            {
+                $parts = $mask;
+            }
+            else if (is_string($mask))
+            {
+                $parts = str_split($mask);
+            }
+            else
+            {
+                return $string;
+            }
+
+            foreach ($parts as $part)
+            {
+                $normalized = self::_normalize("\\{$part}");
+                $string = preg_replace(
+                    "{$normalized}m",
+                    "\\{$part}",
+                    $string
+                );
+            }
+
+            return $string;
+        }
+
+        public static function unique($string)
+        {
+            $unique = "";
+            $parts = str_split($string);
+
+            foreach ($parts as $part)
+            {
+                if (!strstr($unique, $part))
+                {
+                    $unique .= $part;
+                }
+            }
+
+            return $unique;
+        }
+
+        public static function indexOf($string, $substring, $offset=null)
+        {
+            $position = strpos($string, $substring, $offset);
+            if (!is_int($position))
+            {
+                return -1;
+            }
+            return $position;
+        }
+
+
 
     }
 }
