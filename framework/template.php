@@ -288,7 +288,18 @@ namespace Framework
             $tree = $this->_tree($array["all"]);
 
             $this->_code = $this->header.$this->_script($tree).$this->footer;
-            $this->_function = create_function("\$_data", $this->code);
+            //$this->_function = create_function("\$_data", $this->code);
+
+            $arg = "\$_data";
+            $code = $this->_code;
+
+            $this->_function = function(...$runtimeArgs) use  ($arg, $code) {
+                $arg = str_replace("$", "", $arg);
+                $$arg = $runtimeArgs[0];
+
+                $res = eval($code);
+                echo $res;
+            };
 
             return $this;
         }
